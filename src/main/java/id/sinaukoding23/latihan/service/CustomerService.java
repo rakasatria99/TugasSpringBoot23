@@ -42,8 +42,8 @@ public class CustomerService {
             data.setEmail(param.getEmail() != null ? param.getEmail() : data.getEmail());
             data.setStreet(param.getStreet() != null ? param.getStreet() : data.getStreet());
             data.setCity(param.getCity() != null ? param.getCity() : data.getCity());
-            data.setZipCode(param.getZipCode() != null ? param.getZipCode() : data.getZipCode());
             data.setState(param.getState() != null ? param.getState() : data.getState());
+            data.setZipCode(param.getZipCode() != null ? param.getZipCode() : data.getZipCode());
             data.setUpdatedDate(new Date());
 
             return repository.save(data);
