@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 
 @Entity
@@ -43,6 +45,8 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "staff_id")
     private Staff staff;
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
 
 
 

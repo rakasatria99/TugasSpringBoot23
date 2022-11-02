@@ -30,7 +30,6 @@ public class StockService {
 
         return StockMapper.INSTANCE.entityToDto(data);
     }
-
     @Transactional
     public void updateStock(Integer productId, Integer quantity){
         Stocks data = repository.findByProduct_ProductId(productId);

@@ -2,6 +2,7 @@ package id.sinaukoding23.latihan.service;
 
 import id.sinaukoding23.latihan.model.*;
 import id.sinaukoding23.latihan.model.dto.OrderDTO;
+import id.sinaukoding23.latihan.model.enums.StatusOrder;
 import id.sinaukoding23.latihan.model.mapper.*;
 import id.sinaukoding23.latihan.model.Customer;
 import id.sinaukoding23.latihan.model.Order;
@@ -12,11 +13,19 @@ import id.sinaukoding23.latihan.model.mapper.StoreMapper;
 import id.sinaukoding23.latihan.model.mapper.StaffMapper;
 import id.sinaukoding23.latihan.repository.CustomerRepository;
 import id.sinaukoding23.latihan.repository.OrderRepository;
+import id.sinaukoding23.latihan.repository.OrderItemRepository;
 import id.sinaukoding23.latihan.repository.StaffRepository;
 import id.sinaukoding23.latihan.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import id.sinaukoding23.latihan.model.OrderItem;
+import id.sinaukoding23.latihan.model.mapper.OrderMapper;
+
+
+import java.util.Date;
+import java.util.List;
+
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +43,12 @@ public class OrderService {
 
     @Autowired
     private StaffRepository staffRepository;
+
+    @Autowired
+    private StockService stocksService;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Transactional(readOnly = true)
     public List<OrderDTO> findAll(){
@@ -124,4 +139,26 @@ public class OrderService {
 
         return false;
     }
+
+    @Transactional
+    public OrderDTO updateOrderStatus(OrderDTO param, Integer id){
+        Order ref = repository.findById(id).get();
+
+        if (ref != null){
+            ref.setOrderStatus(param.getOrderStatus() != null ? param.getOrderStatus() : ref.getOrderStatus());
+
+            ref = repository.save(ref);
+
+            if (ref.getOrderStatus().equals(StatusOrder.PAYMENT)) {
+                List<OrderItem> orderItem = orderItemRepository.findByOrder_OrderId(ref.getOrderId());
+
+                for (OrderItem item : orderItem) {
+                    stocksService.updateStock(item.getProduct().getProductId(), item.getQuantity());
+                }
+            }
+        }
+
+        return OrderMapper.INSTANCE.entityToDto(ref);
+    }
+
 }

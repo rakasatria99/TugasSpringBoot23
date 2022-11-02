@@ -1,8 +1,8 @@
 package id.sinaukoding23.latihan.controller;
 
 import id.sinaukoding23.latihan.common.RestResult;
-import id.sinaukoding23.latihan.model.dto.OrderDTO;
-import id.sinaukoding23.latihan.service.OrderService;
+import id.sinaukoding23.latihan.model.dto.OrderItemDTO;
+import id.sinaukoding23.latihan.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
-public class OrderController {
+@RequestMapping("/orderitems")
+public class OrderItemController {
     @Autowired
-    private OrderService service;
+    private OrderItemService service;
 
     @GetMapping("/find-all")
     public RestResult getAllData(){
-        List<OrderDTO> data = service.findAll();
+        List<OrderItemDTO> data = service.findAll();
 
         return new RestResult(data, data.size() == 0 ? "Data tidak ditemukan" : "Menampilkan data", data.size(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public RestResult createDate(@RequestBody OrderDTO param){
-        OrderDTO data = service.createData(param);
+    public RestResult createDate(@RequestBody OrderItemDTO param){
+        OrderItemDTO data = service.createData(param);
 
         if (data != null){
             return new RestResult(data, "Data Berhasil disimpan", HttpStatus.OK);
@@ -34,21 +34,9 @@ public class OrderController {
     }
 
     @PutMapping("/update")
-    public RestResult updateData(@RequestBody OrderDTO param,
+    public RestResult updateData(@RequestBody OrderItemDTO param,
                                  @RequestParam(name = "id") int id){
-        OrderDTO data = service.updateData(param, id);
-
-        if (data != null){
-            return new RestResult(data, "Data Berhasil diupdate", HttpStatus.OK);
-        }
-
-        return new RestResult("Data gagal diupdate", HttpStatus.BAD_REQUEST);
-    }
-
-    @PutMapping("/update-status")
-    public RestResult updateDataStatus(@RequestBody OrderDTO param,
-                                       @RequestParam(name = "id") int id){
-        OrderDTO data = service.updateOrderStatus(param, id);
+        OrderItemDTO data = service.updateData(param, id);
 
         if (data != null){
             return new RestResult(data, "Data Berhasil diupdate", HttpStatus.OK);
