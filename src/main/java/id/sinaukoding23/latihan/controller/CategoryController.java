@@ -1,13 +1,10 @@
 package id.sinaukoding23.latihan.controller;
 
 import id.sinaukoding23.latihan.common.RestResult;
-import id.sinaukoding23.latihan.model.Category;
 import id.sinaukoding23.latihan.model.dto.CategoryDTO;
-
 import id.sinaukoding23.latihan.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService service;
+
     @GetMapping("/find-all")
     public RestResult getAllData(){
         List<CategoryDTO> data = service.findAll();

@@ -13,4 +13,5 @@ public class BrandDTO extends BaseDTO  {
     private Integer brandId;
 
     private String brandName;
+
 }

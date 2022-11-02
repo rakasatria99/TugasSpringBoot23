@@ -17,8 +17,6 @@ public class Order extends BaseEntity {
     @Column
     private Integer orderId;
 
-    @Column
-    private Integer customerId;
 
     @Column
     private Byte orderStatus;
@@ -31,6 +29,20 @@ public class Order extends BaseEntity {
 
     @Column
     private java.sql.Date  shippedDate;
+
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private Staff staff;
+
 
 
 
