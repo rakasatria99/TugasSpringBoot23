@@ -23,9 +23,9 @@ public class OrderItemDTO extends BaseDTO  {
 
     private BigDecimal discount;
 
-    private Order order;
+    private OrderDTO order;
 
-    private Product product;
+    private ProductDTO product;
 
 
 }
