@@ -15,10 +15,7 @@ import java.util.List;
 public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column
     private Integer orderId;
-
 
     @Column
     private Byte orderStatus;

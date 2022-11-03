@@ -45,7 +45,7 @@ public class OrderItemService {
             Order resOrder = null;
 
             if (order.getOrderId() != null) {
-                resOrder = orderRepository.getById(order.getOrderId());
+                resOrder = orderRepository.findById(order.getOrderId()).get();
             }
             order.setCreatedDate(resOrder != null ? resOrder.getCreatedDate() : new Date());
 
@@ -58,11 +58,11 @@ public class OrderItemService {
             Product resProduct = null;
 
             if (product.getProductId() != null) {
-                resProduct = productRepository.getById(product.getProductId());
+                resProduct = productRepository.findById(product.getProductId()).get();
             }
-            order.setCreatedDate(resProduct != null ? resProduct.getCreatedDate() : new Date());
+            product.setCreatedDate(resProduct != null ? resProduct.getCreatedDate() : new Date());
 
-            order = orderRepository.save(order);
+            product =  productRepository.save( product);
         }
         
         OrderItem data = OrderItemMapper.INSTANCE.dtoToEntity(param);

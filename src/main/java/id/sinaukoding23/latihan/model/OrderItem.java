@@ -27,7 +27,6 @@ public class OrderItem extends BaseEntity{
     private BigDecimal discount;
 
     @ManyToOne
-    @MapsId("orderId")
     @JoinColumn(name = "order_id")
     private Order order;
 
