@@ -10,13 +10,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class Swagger{
+public class SwaggerConfig {
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
@@ -30,7 +29,7 @@ public class Swagger{
 
     private ApiInfo apiInfo(){
         return new ApiInfo(
-                "Sinau Koding 23 RAKA",
+                "Sinau Koding 23",
                 "API DOcumentation Sinau Koding 23",
                 "1.0",
                 "",
@@ -42,7 +41,8 @@ public class Swagger{
     }
 
     private SecurityScheme securityScheme(){
-        return new ApiKey("Api Token", "Authorization", "header");
+        return new ApiKey("Token",
+                "Authorization", "header");
     }
 
     private SecurityContext securityContext(){
