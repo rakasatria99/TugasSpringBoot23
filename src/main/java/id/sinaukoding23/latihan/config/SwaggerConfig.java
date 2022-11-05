@@ -29,8 +29,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfo(
-                "Sinau Koding 23",
-                "API DOcumentation Sinau Koding 23",
+                "Sinau Koding 23 RAKA",
+                "API DOcumentation Sinau Koding 23 ",
                 "1.0",
                 "",
                 new Contact("Muhammad Raka Satria", "", "raka60218@gmail.com"),
